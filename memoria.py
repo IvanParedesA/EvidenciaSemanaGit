@@ -1,5 +1,5 @@
-from random import *
-from turtle import *
+from turtle import setup, clear, goto, down, up, shape, stamp
+from turtle import tracer, update, ontimer, done, onscreenclick, write
 from freegames import path
 
 car = path('car.gif')
