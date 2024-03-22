@@ -1,32 +1,40 @@
 from turtle import *  # Importing all symbols from the 'turtle' module
 from freegames import line  # Importing the 'line' function from the 'freegames' module
 
+global a, b, center_x, center_y 
+a = 67
+b = 200
+
 
 def grid():
     """Draw tic-tac-toe grid."""
-    line(-67, 200, -67, -200)  # Drawing vertical lines for the grid
-    line(67, 200, 67, -200)
-    line(-200, -67, 200, -67)  # Drawing horizontal lines for the grid
-    line(-200, 67, 200, 67)
+    line(-a, b, -a, -b)  # Drawing vertical lines for the grid
+    line(a, b, a, -b)
+    line(-b, -a, b, -a)  # Drawing horizontal lines for the grid
+    line(-b, a, b, a)
 
 
 def drawx(x, y):
     """Draw X player."""
-    line(x, y, x + 133, y + 133)  # Drawing the first diagonal line for 'X'
-    line(x, y + 133, x + 133, y)  # Drawing the second diagonal line for 'X'
+    center_x = x + a  # Calculating the center of the grid square for x-coordinate
+    center_y = y + a  # Calculating the center of the grid square for y-coordinate
+    line(center_x - 40, center_y - 40, center_x + 40, center_y + 40)  # Drawing the first diagonal line for 'X'
+    line(center_x - 40, center_y + 40, center_x + 40, center_y - 40)  # Drawing the second diagonal line for 'X'
 
 
 def drawo(x, y):
     """Draw O player."""
+    center_x = x + a  # Calculating the center of the grid square for x-coordinate
+    center_y = y + a  # Calculating the center of the grid square for y-coordinate
     up()
-    goto(x + 67, y + 5)  # Moving the pen to the center of the circle
+    goto(center_x, center_y - 40)  # Moving the pen to the center of the circle
     down()
-    circle(62)  # Drawing the circle with a radius of 62
+    circle(40)  # Drawing the circle with a radius of 40
 
 
 def floor(value):
     """Round value down to grid with square size 133."""
-    return ((value + 200) // 133) * 133 - 200  # Rounding down to the nearest grid position
+    return ((value + b) // (a * 2)) * (a * 2) - b  # Rounding down to the nearest grid position
 
 
 state = {'player': 0}  # Dictionary to keep track of the current player
