@@ -1,10 +1,10 @@
 from turtle import *  # Importing all symbols from the 'turtle' module
 from freegames import line  # Importing the 'line' function from the 'freegames' module
 
-global a, b
+# Global variables:
 a = 67
 b = 200
-
+occupied_cells = set() # Set to store the occupied cells
 
 def grid():
     """Draw tic-tac-toe grid."""
@@ -49,9 +49,14 @@ def tap(x, y):
     y = floor(y)  # Rounding down the y-coordinate
     player = state['player']  # Getting the current player
     draw = players[player]  # Getting the draw function for the current player
+
+    if (x, y) in occupied_cells:
+        return  # Don't make a move if the cell is already occupied
+
     draw(x, y)  # Drawing 'X' or 'O' at the tapped square
     update()  # Updating the screen display
     state['player'] = not player  # Changing the player for the next turn
+    occupied_cells.add((x, y))  # Add the cell to the occupied set
 
 
 setup(420, 420, 370, 0)  # Setting up the turtle window
