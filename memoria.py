@@ -1,7 +1,8 @@
 from turtle import setup, clear, goto, down, up, shape, stamp
 from turtle import tracer, update, ontimer, done, onscreenclick
 from turtle import color, begin_fill, forward, left, end_fill
-from turtle import addshape, hideturtle, shuffle, write
+from turtle import addshape, hideturtle, write
+from random import shuffle
 
 from freegames import path
 
@@ -16,6 +17,9 @@ state = {'mark': None}
 
 # Store the and track the hidden tiles
 hide = [True] * 64
+
+# Tap counter variable
+tap_counter = 0
 
 
 # Creates and visually represents the laying board
@@ -32,10 +36,12 @@ def square(x, y):
         left(90)
     end_fill()
 
+
 # Function that changes x,y coordinates to index
 def index(x, y):
     "Convert (x, y) coordinates to tiles index."
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
+
 
 # Function that performs a change in tiles to x,y coordinates
 def xy(count):
@@ -46,6 +52,9 @@ def xy(count):
 # Function registers tap events executed by user
 def tap(x, y):
     "Update mark and hidden tiles based on tap."
+    # Add tap counter to the game and increase when tap
+    global tap_counter
+    tap_counter += 1
     spot = index(x, y)
     mark = state['mark']
 
@@ -69,6 +78,12 @@ def draw():
         if hide[count]:
             x, y = xy(count)
             square(x, y)
+
+    # Creating the text on screen
+    up()
+    goto(-190, 180)
+    color('blue')
+    write(f'Taps: {tap_counter}', font=('Arial', 16, 'normal'))
 
     mark = state['mark']
 
