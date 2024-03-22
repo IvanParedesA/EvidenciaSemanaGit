@@ -85,7 +85,7 @@ def valid(point):
 # Función para dibujar el mapa
 def world():
     bgcolor('black')
-    path.color('blue')
+    path.color('green')
 
     for index in range(len(tiles)):
         tile = tiles[index]
