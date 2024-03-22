@@ -73,16 +73,19 @@ def draw():
     goto(0, 0)
     shape(car)
     stamp()
+    # Variable that determines all tiles as uncovered
+    uncovered_tiles = True
 
     for count in range(64):
         if hide[count]:
+            uncovered_tiles = False
             x, y = xy(count)
             square(x, y)
 
     # Creating the text on screen
     up()
     goto(-190, 180)
-    color('blue')
+    color('green')
     write(f'Taps: {tap_counter}', font=('Arial', 16, 'normal'))
 
     mark = state['mark']
@@ -95,6 +98,11 @@ def draw():
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
     update()
+    if uncovered_tiles:
+        up()
+        goto(0, 0)
+        color('green')
+        write("Congratulations!", align='center', font=('Arial', 35, 'normal'))
     ontimer(draw, 100)
 
 
