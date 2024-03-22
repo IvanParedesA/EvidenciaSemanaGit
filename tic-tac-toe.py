@@ -1,7 +1,7 @@
 from turtle import *  # Importing all symbols from the 'turtle' module
 from freegames import line  # Importing the 'line' function from the 'freegames' module
 
-global a, b, center_x, center_y 
+global a, b
 a = 67
 b = 200
 
@@ -18,6 +18,7 @@ def drawx(x, y):
     """Draw X player."""
     center_x = x + a  # Calculating the center of the grid square for x-coordinate
     center_y = y + a  # Calculating the center of the grid square for y-coordinate
+    color('blue') # Setting color to blue
     line(center_x - 40, center_y - 40, center_x + 40, center_y + 40)  # Drawing the first diagonal line for 'X'
     line(center_x - 40, center_y + 40, center_x + 40, center_y - 40)  # Drawing the second diagonal line for 'X'
 
@@ -26,6 +27,7 @@ def drawo(x, y):
     """Draw O player."""
     center_x = x + a  # Calculating the center of the grid square for x-coordinate
     center_y = y + a  # Calculating the center of the grid square for y-coordinate
+    color('red') # Setting color to red
     up()
     goto(center_x, center_y - 40)  # Moving the pen to the center of the circle
     down()
